@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuth, findDemoUser } from '@/composables/useAuth'
 
@@ -20,25 +20,15 @@ import { useAuth, findDemoUser } from '@/composables/useAuth'
  */
 const router = useRouter()
 const route = useRoute()
-const { startSession, rememberedEmail, rememberEmail, forgetEmail } = useAuth()
+const { startSession } = useAuth()
 
 const email = ref('')
 const password = ref('')
-const rememberMe = ref(false)
 const showPassword = ref(false)
 
 const alertMessage = ref('')
 const emailError = ref('')
 const passwordError = ref('')
-
-// Prefill from "Remember me". The original read sessionStorage directly on
-// page load; the ref is already hydrated by the composable at module load.
-onMounted(() => {
-  if (rememberedEmail.value) {
-    email.value = rememberedEmail.value
-    rememberMe.value = true
-  }
-})
 
 function onSubmit() {
   const trimmedEmail = email.value.trim()
@@ -64,11 +54,6 @@ function onSubmit() {
   passwordError.value = ''
 
   startSession(user)
-
-  // "Remember me" is stored in sessionStorage, not localStorage, in the
-  // original - the email is prefilled for this browser session only.
-  if (rememberMe.value) rememberEmail(trimmedEmail)
-  else forgetEmail()
 
   router.push(destination.value)
 }
@@ -139,18 +124,13 @@ const destination = computed(() => {
         </div>
 
         <div class="form__group">
-          <label class="checkbox-group">
-            <input v-model="rememberMe" type="checkbox" id="remember-me">
-            Remember me
+          <label class="checkbox-group auth__show-password">
+            <input v-model="showPassword" type="checkbox" id="show-password">
+            Show password
           </label>
         </div>
 
         <button type="submit" class="btn btn--primary btn--full">Log In</button>
-
-        <label class="checkbox-group auth__show-password">
-          <input v-model="showPassword" type="checkbox" id="show-password">
-          Show password
-        </label>
       </form>
 
       <div class="auth__demo">
