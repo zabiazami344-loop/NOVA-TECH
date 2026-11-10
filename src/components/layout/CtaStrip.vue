@@ -30,7 +30,22 @@ defineProps({
 
       <p v-if="desc">{{ desc }}</p>
 
-      <router-link :to="to" class="btn btn--outline">{{ cta }}</router-link>
+      <router-link :to="to" class="btn btn--primary cta-strip__button">{{ cta }}</router-link>
     </div>
   </section>
 </template>
+
+<style scoped>
+.cta-strip {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-strip__button {
+  box-shadow: 0 12px 30px rgba(10, 132, 255, 0.28);
+}
+
+.cta-strip__button:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+</style>
