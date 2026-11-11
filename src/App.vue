@@ -21,7 +21,11 @@ const showChrome = computed(() => route.meta.chrome !== false)
     URL". It uses the default slot, so each view must have exactly ONE root
     element.
   -->
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <Transition name="route" mode="out-in">
+      <component :is="Component" :key="route.path" />
+    </Transition>
+  </router-view>
 
   <SiteFooter v-if="showChrome" />
 

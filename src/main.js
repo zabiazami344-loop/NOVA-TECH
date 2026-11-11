@@ -15,6 +15,7 @@ import { directives } from './directives'
 import './assets/css/style.css'
 import './assets/css/animations.css'
 import './assets/css/responsive.css'
+import './assets/css/polish.css'
 
 const app = createApp(App)
 
