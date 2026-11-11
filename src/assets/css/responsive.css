@@ -113,6 +113,18 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .auth__layout {
+    grid-template-columns: minmax(0, 1fr) minmax(370px, 0.95fr);
+  }
+
+  .auth__welcome {
+    padding: 40px 34px 32px;
+  }
+
+  .auth__box {
+    padding: 44px 36px;
+  }
+
   .project-form {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -217,6 +229,42 @@
 
   .form__row {
     grid-template-columns: 1fr;
+  }
+
+  .auth {
+    min-height: calc(100svh - 74px);
+    padding: 32px 18px;
+  }
+
+  .auth__layout {
+    max-width: 520px;
+    grid-template-columns: 1fr;
+  }
+
+  .auth__welcome {
+    min-height: auto;
+    padding: 28px 28px 24px;
+  }
+
+  .auth__welcome-copy {
+    margin: 38px 0 28px;
+  }
+
+  .auth__welcome-copy h2 {
+    max-width: 360px;
+    font-size: 2.2rem;
+  }
+
+  .auth__visual {
+    min-height: 70px;
+  }
+
+  .auth__visual-mark {
+    font-size: 5.25rem;
+  }
+
+  .auth__box {
+    padding: 34px 28px 30px;
   }
 
   .contact-form-wrap {
@@ -387,6 +435,24 @@
 
   .modal__box {
     padding: 32px 22px;
+  }
+
+  .auth {
+    padding: 22px 14px;
+  }
+
+  .auth__welcome {
+    padding: 24px 22px 20px;
+  }
+
+  .auth__box {
+    padding: 30px 22px 24px;
+  }
+
+  .auth__demo-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
   }
 
   .values-grid {

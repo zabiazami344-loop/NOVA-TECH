@@ -2724,85 +2724,241 @@ html[data-theme="dark"] .theme-toggle .theme-toggle__icon--sun {
    24. LOGIN PAGE
    ========================================================================== */
 .auth {
-  min-height: calc(100vh - 74px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 16px 56px;
-  background:
-    radial-gradient(ellipse at top, rgba(10, 132, 255, 0.07), transparent 60%),
-    var(--color-bg);
+  min-height: calc(100svh - 74px);
+  display: grid;
+  place-items: center;
+  padding: 48px 24px;
+  background-color: #f7fafc;
+  background-image:
+    linear-gradient(rgba(38, 91, 122, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38, 91, 122, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
   position: relative;
 }
 
-.auth::before {
-  content: "";
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 480px;
-  height: 480px;
-  background: radial-gradient(circle, rgba(100, 210, 255, 0.04) 0%, transparent 70%);
-  border-radius: 50%;
-  filter: blur(80px);
-  pointer-events: none;
+.auth__layout {
+  width: min(100%, 1080px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.96fr) minmax(390px, 0.84fr);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e3ebef;
+  border-radius: 24px;
+  box-shadow: 0 24px 70px rgba(35, 67, 83, 0.1);
+}
+
+.auth__welcome {
+  min-height: 590px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 44px 48px 38px;
+  overflow: hidden;
+  position: relative;
+  background-color: #edf7f6;
+  background-image:
+    linear-gradient(rgba(38, 91, 122, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38, 91, 122, 0.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+.auth__brandline {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: var(--size-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.auth__brandline small {
+  display: block;
+  margin-top: 2px;
+  color: #647a80;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+}
+
+.auth__brandmark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  color: #fff;
+  background: #1687d5;
+  font-size: 1.15rem;
+  font-weight: 700;
+  box-shadow: 0 5px 12px rgba(22, 135, 213, 0.2);
+}
+
+.auth__welcome-copy {
+  max-width: 390px;
+  margin: 60px 0 42px;
+}
+
+.auth__eyebrow {
+  margin-bottom: 15px;
+  color: #16817e;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.auth__welcome-copy h2 {
+  max-width: 390px;
+  margin-bottom: 17px;
+  color: #172f3a;
+  font-size: 2.75rem;
+  font-weight: 650;
+  line-height: 1.08;
+}
+
+.auth__welcome-copy h2 span {
+  color: #16817e;
+}
+
+.auth__welcome-copy > p:last-child {
+  max-width: 340px;
+  color: #5b7078;
+  font-size: var(--size-base);
+  line-height: 1.7;
+}
+
+.auth__visual {
+  min-height: 92px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  border-top: 1px solid rgba(39, 93, 102, 0.2);
+  position: relative;
+}
+
+.auth__visual-mark {
+  color: rgba(22, 129, 126, 0.16);
+  font-size: 7rem;
+  font-weight: 750;
+  line-height: 0.78;
+}
+
+.auth__visual-caption {
+  padding: 0 0 6px 12px;
+  border-left: 2px solid #16817e;
+  color: #47656a;
+  font-size: var(--size-xs);
+  font-weight: 600;
 }
 
 .auth__box {
   width: 100%;
-  max-width: 420px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: var(--glass-blur-heavy);
-  -webkit-backdrop-filter: var(--glass-blur-heavy);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: var(--radius-lg);
-  padding: 44px 36px;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 52px 54px;
   position: relative;
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.2), inset 0 0.5px 0 rgba(255, 255, 255, 0.7);
+  background: #fff;
+}
+
+.auth__box-heading {
+  margin-bottom: 28px;
 }
 
 .auth__title {
-  font-size: var(--size-2xl);
+  font-size: 2rem;
   margin-bottom: 8px;
-  letter-spacing: -0.02em;
 }
 
 .auth__sub {
   color: var(--color-text-muted);
   font-size: var(--size-sm);
-  margin-bottom: 28px;
+  margin-bottom: 0;
+}
+
+.auth__box .form__group {
+  margin-bottom: 19px;
+}
+
+.auth__box .form__input {
+  min-height: 50px;
+  background: #fbfdfe;
+  border-color: #dce6eb;
+  border-radius: 10px;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.auth__box .form__input:focus {
+  border-color: #1687d5;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(22, 135, 213, 0.12);
+}
+
+.auth__password-toggle {
+  margin-bottom: 13px !important;
+}
+
+.auth__show-password {
+  margin: 0;
+}
+
+.auth__box .btn--full {
+  min-height: 52px;
+  border-radius: 11px;
 }
 
 .auth__alert {
-  display: none;
+  display: block;
   padding: 12px 16px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   font-size: var(--size-sm);
   color: #ff453a;
   background: rgba(255, 69, 58, 0.08);
   border: 1px solid rgba(255, 69, 58, 0.2);
-  border-radius: var(--radius-sm);
-}
-
-.auth__alert.show {
-  display: block;
+  border-radius: 10px;
 }
 
 .auth__demo {
-  margin-top: 24px;
-  padding: 16px;
+  margin-top: 26px;
+  padding: 16px 17px;
   font-size: var(--size-xs);
-  line-height: 1.7;
   color: var(--color-text-muted);
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px dashed var(--glass-border);
-  border-radius: var(--radius-sm);
+  background: #f4f8fa;
+  border: 1px solid #e7eef1;
+  border-radius: 10px;
+}
+
+.auth__demo-title {
+  margin-bottom: 3px;
+  color: var(--color-text);
+  font-size: var(--size-sm);
+  font-weight: 700;
+}
+
+.auth__demo-note {
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.auth__demo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(43, 76, 91, 0.08);
+}
+
+.auth__demo-row + .auth__demo-row {
+  margin-top: 7px;
 }
 
 .auth__demo code {
   color: var(--color-primary-light);
   font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 .checkbox-group {
@@ -3522,8 +3678,60 @@ html[data-theme="dark"] .modal__box {
 }
 
 html[data-theme="dark"] .auth__box {
-  background: rgba(30, 30, 32, 0.7);
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.4), inset 0 0.5px 0 rgba(255, 255, 255, 0.14);
+  background: #151d25;
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .auth {
+  background-color: #0e151b;
+  background-image:
+    linear-gradient(rgba(200, 230, 240, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 230, 240, 0.035) 1px, transparent 1px);
+}
+
+html[data-theme="dark"] .auth__layout {
+  background: #151d25;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
+}
+
+html[data-theme="dark"] .auth__welcome {
+  background-color: #172b31;
+  background-image:
+    linear-gradient(rgba(200, 230, 240, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 230, 240, 0.045) 1px, transparent 1px);
+}
+
+html[data-theme="dark"] .auth__welcome-copy h2 {
+  color: #edf6f6;
+}
+
+html[data-theme="dark"] .auth__welcome-copy > p:last-child,
+html[data-theme="dark"] .auth__brandline small,
+html[data-theme="dark"] .auth__visual-caption {
+  color: #b0c5c8;
+}
+
+html[data-theme="dark"] .auth__visual {
+  border-color: rgba(220, 245, 245, 0.16);
+}
+
+html[data-theme="dark"] .auth__box .form__input {
+  background: #1b2630;
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+html[data-theme="dark"] .auth__box .form__input:focus {
+  background: #202d38;
+}
+
+html[data-theme="dark"] .auth__demo {
+  background: #1b2630;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+html[data-theme="dark"] .auth__demo-row {
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 /* Page hero + CTA strip */
@@ -3538,11 +3746,6 @@ html[data-theme="dark"] .cta-strip .btn--outline {
 html[data-theme="dark"] .cta-strip .btn--outline:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.3);
-}
-
-/* Auth demo box */
-html[data-theme="dark"] .auth__demo {
-  background: rgba(255, 255, 255, 0.04);
 }
 
 /* Dashboard sidebar + links */

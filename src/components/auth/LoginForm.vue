@@ -79,64 +79,88 @@ const destination = computed(() => {
 
 <template>
   <section class="auth">
-    <div class="auth__box">
-      <h1 class="auth__title">Welcome Back</h1>
-      <p class="auth__sub">Log in to access your NOVA TECH dashboard.</p>
-
-      <!-- v-show matches the original's classList.add('show') behaviour -->
-      <div v-show="alertMessage" class="auth__alert" role="alert">{{ alertMessage }}</div>
-
-      <form novalidate @submit.prevent="onSubmit">
-        <div class="form__group" :class="{ error: emailError }">
-          <label class="form__label" for="login-email">
-            Email Address <span class="form__required">*</span>
-          </label>
-          <input
-            id="login-email"
-            v-model="email"
-            type="email"
-            class="form__input"
-            placeholder="admin@novatech.com"
-            autocomplete="email"
-            @input="emailError = ''"
-          >
-          <p class="form__error">{{ emailError }}</p>
+    <div class="auth__layout">
+      <aside class="auth__welcome">
+        <div class="auth__brandline">
+          <span class="auth__brandmark" aria-hidden="true">N</span>
+          <span>NOVA TECH <small>MEMBER SPACE</small></span>
         </div>
 
-        <div class="form__group" :class="{ error: passwordError }">
-          <label class="form__label" for="login-password">
-            Password <span class="form__required">*</span>
-          </label>
-          <!--
-            :type is bound to the checkbox. The original did this with a change
-            listener that assigned .type imperatively.
-          -->
-          <input
-            id="login-password"
-            v-model="password"
-            :type="showPassword ? 'text' : 'password'"
-            class="form__input"
-            placeholder="Enter your password"
-            autocomplete="current-password"
-            @input="passwordError = ''"
-          >
-          <p class="form__error">{{ passwordError }}</p>
+        <div class="auth__welcome-copy">
+          <p class="auth__eyebrow">BUILD WHAT'S NEXT</p>
+          <h2>Ideas move faster <span>when we're connected.</span></h2>
+          <p>Pick up where your team left off and keep great work moving.</p>
         </div>
 
-        <div class="form__group">
-          <label class="checkbox-group auth__show-password">
-            <input v-model="showPassword" type="checkbox" id="show-password">
-            Show password
-          </label>
+        <div class="auth__visual" aria-hidden="true">
+          <span class="auth__visual-mark">N</span>
+          <span class="auth__visual-caption">A workspace for what matters.</span>
+        </div>
+      </aside>
+
+      <div class="auth__box">
+        <div class="auth__box-heading">
+          <p class="auth__eyebrow">MEMBER ACCESS</p>
+          <h1 class="auth__title">Welcome back</h1>
+          <p class="auth__sub">Log in to access your NOVA TECH dashboard.</p>
         </div>
 
-        <button type="submit" class="btn btn--primary btn--full">Log In</button>
-      </form>
+        <!-- v-show matches the original's classList.add('show') behaviour -->
+        <div v-show="alertMessage" class="auth__alert" role="alert">{{ alertMessage }}</div>
 
-      <div class="auth__demo">
-        <strong>Demo credentials</strong> (client-side only — nothing is sent to a server):<br>
-        Email: <code>admin@novatech.com</code><br>
-        Password: <code>admin123</code>
+        <form novalidate @submit.prevent="onSubmit">
+          <div class="form__group" :class="{ error: emailError }">
+            <label class="form__label" for="login-email">
+              Email Address <span class="form__required">*</span>
+            </label>
+            <input
+              id="login-email"
+              v-model="email"
+              type="email"
+              class="form__input"
+              placeholder="admin@novatech.com"
+              autocomplete="email"
+              @input="emailError = ''"
+            >
+            <p class="form__error">{{ emailError }}</p>
+          </div>
+
+          <div class="form__group" :class="{ error: passwordError }">
+            <label class="form__label" for="login-password">
+              Password <span class="form__required">*</span>
+            </label>
+            <!--
+              :type is bound to the checkbox. The original did this with a change
+              listener that assigned .type imperatively.
+            -->
+            <input
+              id="login-password"
+              v-model="password"
+              :type="showPassword ? 'text' : 'password'"
+              class="form__input"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              @input="passwordError = ''"
+            >
+            <p class="form__error">{{ passwordError }}</p>
+          </div>
+
+          <div class="form__group auth__password-toggle">
+            <label class="checkbox-group auth__show-password">
+              <input v-model="showPassword" type="checkbox" id="show-password">
+              Show password
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--full">Log In</button>
+        </form>
+
+        <div class="auth__demo">
+          <p class="auth__demo-title">Demo access</p>
+          <p class="auth__demo-note">Explore the dashboard with these sample credentials. Nothing is sent to a server.</p>
+          <div class="auth__demo-row"><span>Email</span><code>admin@novatech.com</code></div>
+          <div class="auth__demo-row"><span>Password</span><code>admin123</code></div>
+        </div>
       </div>
     </div>
   </section>
