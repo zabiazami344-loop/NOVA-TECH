@@ -1,3 +1,5 @@
+import orbitRideImage from '@/assets/images/orbitride-cover.svg'
+
 /**
  * The project catalogue - 12 projects, copied verbatim from the original
  * js/projects.js `projectsData` array.
@@ -7,6 +9,7 @@
  *   name            string   card + modal title
  *   category        string   web | mobile | ai | security
  *   imageText       string   the big gradient label (BRIGHT, ORBIT, ...)
+ *   image           string   remote thumbnail used by project cards
  *   description     string   short line on the card
  *   longDescription string   the paragraph shown in the modal
  *   technologies    string[] 3-5 chips on the card
@@ -19,6 +22,7 @@ export const projects = [
     name: 'BrightCart Commerce Platform',
     category: 'web',
     imageText: 'BRIGHT',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1000&q=85',
     description: 'A blazing-fast e-commerce platform rebuilt from a slow legacy monolith.',
     longDescription:
       "We modernized BrightCart's entire online store, introduced a modular architecture and cut page load times by 60%, which directly lifted conversion rates across their catalog.",
@@ -31,6 +35,7 @@ export const projects = [
     name: 'Finlytics Analytics Dashboard',
     category: 'web',
     imageText: 'FINLYTICS',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=85',
     description: 'Real-time financial analytics that turned raw data into clear decisions.',
     longDescription:
       'A custom dashboard with live charts, role-based access and automated reports. Finlytics analysts now answer in minutes what used to take a full afternoon.',
@@ -43,6 +48,7 @@ export const projects = [
     name: 'MediTrust Patient Portal',
     category: 'web',
     imageText: 'MEDI',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=85',
     description: 'A secure patient portal connecting clinics with thousands of patients.',
     longDescription:
       'We built a HIPAA-aware portal with appointment booking, records access and secure messaging. A clean, accessible interface for patients of all ages.',
@@ -55,6 +61,7 @@ export const projects = [
     name: 'OrbitRide Ride-Hailing App',
     category: 'mobile',
     imageText: 'ORBIT',
+    image: orbitRideImage,
     description: 'A ride-hailing mobile app with live tracking and instant booking.',
     longDescription:
       'Drivers and riders connect through real-time GPS, in-app payments and a smart dispatch engine. Over 100k rides booked in the first year.',
@@ -67,6 +74,7 @@ export const projects = [
     name: 'FitPulse Fitness Tracker',
     category: 'mobile',
     imageText: 'FITPULSE',
+    image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1000&q=85',
     description: 'A health app that turns daily activity into motivating workout plans.',
     longDescription:
       'FitPulse syncs with wearables, generates adaptive training plans and keeps users accountable with streaks, goals and friendly in-app challenges.',
@@ -79,6 +87,7 @@ export const projects = [
     name: 'TravelBee Trip Planner',
     category: 'mobile',
     imageText: 'TRAVELBEE',
+    image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1000&q=85',
     description: 'A cross-platform trip planner with offline maps and smart itineraries.',
     longDescription:
       'One codebase, two stores. TravelBee helps travellers organise flights, hotels and day plans, then works offline anywhere in the world.',
@@ -91,6 +100,7 @@ export const projects = [
     name: 'Sentra AI Support Assistant',
     category: 'ai',
     imageText: 'SENTRA',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=85',
     description: 'An intelligent support assistant that resolves 80% of tickets automatically.',
     longDescription:
       'Trained on years of support history, Sentra answers common questions instantly and routes the rest to the right human — cutting first-response time by 90%.',
@@ -103,6 +113,7 @@ export const projects = [
     name: 'VisionGuard Defect Detection',
     category: 'ai',
     imageText: 'VISION',
+    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=85',
     description: 'Computer vision that spots production defects in real time.',
     longDescription:
       'A camera-based ML pipeline inspects thousands of units per hour and flags defects the human eye misses, reducing waste by 35% on the factory floor.',
@@ -115,6 +126,7 @@ export const projects = [
     name: 'InsightIQ Sales Forecasting',
     category: 'ai',
     imageText: 'INSIGHT',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=85',
     description: 'A forecasting engine that predicts revenue with 94% accuracy.',
     longDescription:
       'InsightIQ combines market data and internal history to forecast sales by region and channel, giving leadership a confident view months ahead.',
@@ -127,6 +139,7 @@ export const projects = [
     name: 'SecureBank Fraud Shield',
     category: 'security',
     imageText: 'SECURE',
+    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1000&q=85',
     description: 'Real-time fraud detection protecting millions of banking transactions.',
     longDescription:
       "We hardened SecureBank's transaction flow with behavioural analytics and anomaly detection, blocking fraudulent activity while keeping false positives low.",
@@ -139,6 +152,7 @@ export const projects = [
     name: 'AuthShield Identity Platform',
     category: 'security',
     imageText: 'AUTH',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=85',
     description: 'A single sign-on and identity platform trusted by enterprise teams.',
     longDescription:
       'AuthShield delivers SSO, MFA and role-based access across every internal app, with zero-trust policies enforced everywhere by default.',
@@ -151,6 +165,7 @@ export const projects = [
     name: 'CyberSentinel Threat Monitor',
     category: 'security',
     imageText: 'CYBER',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=85',
     description: 'A 24/7 security monitoring center that detects threats before they spread.',
     longDescription:
       'CyberSentinel aggregates logs from hundreds of sources, correlates them with known attack patterns and alerts security teams in under a minute.',

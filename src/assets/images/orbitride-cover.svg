@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="130" y1="40" x2="1090" y2="690" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#132E37"/>
+      <stop offset=".52" stop-color="#244E57"/>
+      <stop offset="1" stop-color="#788F83"/>
+    </linearGradient>
+    <linearGradient id="road" x1="590" y1="375" x2="650" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#314C50"/>
+      <stop offset="1" stop-color="#172B31"/>
+    </linearGradient>
+    <linearGradient id="car" x1="386" y1="435" x2="793" y2="578" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5C989"/>
+      <stop offset="1" stop-color="#E58D68"/>
+    </linearGradient>
+    <linearGradient id="phone" x1="838" y1="155" x2="1084" y2="547" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F7EF"/>
+      <stop offset="1" stop-color="#DDE8DD"/>
+    </linearGradient>
+    <filter id="glow" x="48" y="12" width="456" height="451" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="42"/>
+    </filter>
+    <filter id="shadow" x="345" y="411" width="502" height="222" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="720" rx="34" fill="url(#sky)"/>
+  <circle cx="274" cy="235" r="146" fill="#D1A77A" fill-opacity=".26" filter="url(#glow)"/>
+  <circle cx="275" cy="235" r="79" fill="#F2D1A3" fill-opacity=".88"/>
+  <path d="M0 369 92 340v29l87-73v73l110-118v118l101-72v73l92-127v127l103-76v76l105-113v113l117-80v80l90-60v60l119-96v376H0V369Z" fill="#233F44" fill-opacity=".72"/>
+  <path d="M0 421h1200v299H0z" fill="#243D42"/>
+  <path d="m422 421 359 0 250 299H170l252-299Z" fill="url(#road)"/>
+  <path d="m583 431-14 80h34l13-80h-33Zm-27 141-13 72h42l12-72h-41Z" fill="#F0D8A7" fill-opacity=".67"/>
+  <path d="M0 585c194-80 320-95 486-67m714 70c-130-51-236-72-356-67" stroke="#D8BB8A" stroke-opacity=".42" stroke-width="4" stroke-dasharray="12 15"/>
+  <g opacity=".82" stroke="#B8D7C8" stroke-width="3">
+    <path d="M89 476c77-48 141-50 214-3s131 48 198 6"/>
+    <path d="M53 535c98-56 178-56 268 2s174 56 262-4"/>
+    <path d="M104 604c84-43 147-41 223 5"/>
+  </g>
+  <path d="M492 478c71-67 130-52 169-2 37 48 62 41 98 0" stroke="#DBB26F" stroke-width="7" stroke-linecap="round" stroke-dasharray="1 18"/>
+  <circle cx="492" cy="478" r="13" fill="#F3D69D"/>
+  <circle cx="759" cy="476" r="13" fill="#F3D69D"/>
+  <ellipse cx="594" cy="576" rx="207" ry="38" fill="#101E22" fill-opacity=".56" filter="url(#shadow)"/>
+  <path d="m390 526 40-68c8-13 22-21 38-21h171c20 0 39 9 52 24l53 65 34 15c12 5 20 17 20 30v28H375v-37c0-15 5-28 15-36Z" fill="url(#car)"/>
+  <path d="m449 461-31 57h103v-69h-33c-17 0-31 4-39 12Zm96-12v69h164l-41-48c-12-14-29-21-47-21h-76Z" fill="#28484D"/>
+  <path d="M390 526h360" stroke="#FFE0AE" stroke-opacity=".72" stroke-width="5"/>
+  <path d="M376 558h44m327 0h46" stroke="#FFF1CE" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="456" cy="595" r="34" fill="#17292D"/>
+  <circle cx="456" cy="595" r="16" fill="#9EAAA0"/>
+  <circle cx="700" cy="595" r="34" fill="#17292D"/>
+  <circle cx="700" cy="595" r="16" fill="#9EAAA0"/>
+  <rect x="836" y="139" width="258" height="424" rx="36" fill="#152D32" fill-opacity=".38"/>
+  <rect x="850" y="126" width="258" height="424" rx="36" fill="#152D32"/>
+  <rect x="860" y="137" width="238" height="402" rx="27" fill="url(#phone)"/>
+  <rect x="930" y="149" width="99" height="18" rx="9" fill="#152D32"/>
+  <text x="883" y="206" fill="#23454A" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2">YOUR RIDE</text>
+  <text x="883" y="240" fill="#18383F" font-family="Arial, sans-serif" font-size="28" font-weight="700">On the way</text>
+  <rect x="880" y="263" width="198" height="159" rx="15" fill="#D3E2D6"/>
+  <path d="M892 300c31-25 43 23 71 0 27-22 41-15 60 7 18 21 29 1 43-7m-174 84c26-20 41-39 67-27 28 13 43 32 67 16 21-14 32-16 45-10" stroke="#A8C6B4" stroke-width="4" stroke-linecap="round"/>
+  <path d="M912 389c26-52 39-41 63-64 25-24 34-32 58-26" stroke="#D68C68" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 12"/>
+  <circle cx="912" cy="389" r="8" fill="#D68C68"/>
+  <circle cx="1033" cy="299" r="8" fill="#267B72"/>
+  <rect x="881" y="438" width="196" height="48" rx="15" fill="#147C71"/>
+  <text x="931" y="468" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1">TRACK RIDE</text>
+  <text x="883" y="515" fill="#54716A" font-family="Arial, sans-serif" font-size="13">Driver arriving in 3 min</text>
+  <circle cx="92" cy="105" r="4" fill="#FFF2D8" fill-opacity=".82"/>
+  <circle cx="653" cy="100" r="3" fill="#FFF2D8" fill-opacity=".7"/>
+  <circle cx="759" cy="207" r="4" fill="#FFF2D8" fill-opacity=".62"/>
+</svg>

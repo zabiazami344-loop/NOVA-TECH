@@ -28,6 +28,13 @@ function showDetails(project) {
 <template>
   <article class="project-card card-enter" :data-category="project.category">
     <div class="project-card__image">
+      <img
+        class="project-card__thumbnail"
+        :src="project.image"
+        :alt="`${project.name} preview`"
+        loading="lazy"
+        decoding="async"
+      />
       <span class="project-card__label">{{ project.imageText }}</span>
       <span class="project-card__category">{{ capitalize(project.category) }}</span>
     </div>
