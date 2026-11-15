@@ -6,7 +6,8 @@ import SearchInput from '@/components/ui/SearchInput.vue'
 import FilterBar from '@/components/ui/FilterBar.vue'
 import ResultCount from '@/components/ui/ResultCount.vue'
 import EmptyState from '@/components/ui/EmptyState.vue'
-import { projects, projectFilters, projectSortOptions } from '@/data/projects'
+import { projectFilters, projectSortOptions } from '@/data/projects'
+import { useProjects } from '@/composables/useProjects'
 
 /**
  * ProjectsExplorer - search + category filter + sort over all 12 projects.
@@ -23,10 +24,8 @@ import { projects, projectFilters, projectSortOptions } from '@/data/projects'
  *     .active class on every sibling button.
  */
 
-// useExplore expects a REF of the list, not the array itself - that is what
-// lets it stay reactive. ref(projects) wraps the imported array; because it is
-// a plain array (not reactive), no copy of the data is made.
-const { search, filter, filteredItems, isEmpty } = useExplore(ref(projects), {
+const { projects, loading, error, loadProjects } = useProjects()
+const { search, filter, filteredItems, isEmpty } = useExplore(projects, {
   // Searched by the visitor's typing.
   searchFields: ['name', 'description', 'client'],
   // The chip buttons compare against this key.
@@ -35,6 +34,8 @@ const { search, filter, filteredItems, isEmpty } = useExplore(ref(projects), {
   // `while` loop in matchesProjectSearch().
   nestedField: 'technologies',
 })
+
+loadProjects()
 
 // The sort dropdown is a third piece of state, so it gets its own ref.
 const sort = ref('newest')
@@ -92,25 +93,30 @@ const visibleProjects = computed(() =>
 
       <FilterBar v-model="filter" :options="projectFilters" />
 
-      <ResultCount :count="visibleProjects.length" singular="project" />
+      <p v-if="loading" class="projects__feedback" role="status">Loading projects...</p>
+      <p v-else-if="error" class="projects__feedback" role="alert">{{ error }}</p>
 
-      <div class="projects__grid">
-        <!--
-          :key is the project id, NOT the array index. Vue uses the key to
-          recognise which card is which, so deleting a search result removes
-          only that node instead of re-patching every card after it. That is
-          what keeps the reveal animations attached to the right elements.
-        -->
-        <ProjectCard
-          v-for="project in visibleProjects"
-          :key="project.id"
-          :project="project"
-        />
-      </div>
+      <template v-else>
+        <ResultCount :count="visibleProjects.length" singular="project" />
 
-      <EmptyState :show="isEmpty">
-        No projects match your search. Try a different keyword or filter.
-      </EmptyState>
+        <div class="projects__grid">
+          <!--
+            :key is the project id, NOT the array index. Vue uses the key to
+            recognise which card is which, so deleting a search result removes
+            only that node instead of re-patching every card after it. That is
+            what keeps the reveal animations attached to the right elements.
+          -->
+          <ProjectCard
+            v-for="project in visibleProjects"
+            :key="project.id"
+            :project="project"
+          />
+        </div>
+
+        <EmptyState :show="isEmpty">
+          No projects match your search. Try a different keyword or filter.
+        </EmptyState>
+      </template>
     </div>
   </section>
 </template>

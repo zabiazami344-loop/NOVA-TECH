@@ -893,6 +893,12 @@ html[data-theme="dark"] .theme-toggle .theme-toggle__icon--sun {
   gap: 24px;
 }
 
+.projects__feedback {
+  margin: 0 0 28px;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
 .project-card {
   overflow: hidden;
   background: var(--glass-bg);

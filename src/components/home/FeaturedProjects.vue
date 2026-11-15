@@ -3,11 +3,15 @@ import { ref, computed } from 'vue'
 import SectionHead from '@/components/ui/SectionHead.vue'
 import FilterBar from '@/components/ui/FilterBar.vue'
 import ProjectCard from '@/components/cards/ProjectCard.vue'
-import { projects, projectFilters, FEATURED_LIMIT } from '@/data/projects'
+import { projectFilters, FEATURED_LIMIT } from '@/data/projects'
+import { useProjects } from '@/composables/useProjects'
 
 // ONE piece of state for the filter bar. In the original this was:
 //   let featuredFilter = 'all';
 const activeFilter = ref('all')
+const { projects, loading, error, loadProjects } = useProjects()
+
+loadProjects()
 
 // computed = derived state. It is NOT stored anywhere; it is recalculated
 // whenever activeFilter or projects changes.
@@ -21,8 +25,8 @@ const activeFilter = ref('all')
 const featuredProjects = computed(() => {
   const matching =
     activeFilter.value === 'all'
-      ? projects
-      : projects.filter((project) => project.category === activeFilter.value)
+      ? projects.value
+      : projects.value.filter((project) => project.category === activeFilter.value)
 
   // Note: .slice() returns a copy, so this can never mutate the source array.
   return matching.slice(0, FEATURED_LIMIT)
@@ -45,8 +49,11 @@ const featuredProjects = computed(() => {
       -->
       <FilterBar v-model="activeFilter" :options="projectFilters" />
 
+      <p v-if="loading" class="projects__feedback" role="status">Loading projects...</p>
+      <p v-else-if="error" class="projects__feedback" role="alert">{{ error }}</p>
+
       <!-- v-for replaces grid.innerHTML = cardsHtml -->
-      <div class="projects__grid">
+      <div v-if="!loading && !error" class="projects__grid">
         <ProjectCard
           v-for="project in featuredProjects"
           :key="project.id"
@@ -54,7 +61,7 @@ const featuredProjects = computed(() => {
         />
       </div>
 
-      <div class="projects__more">
+      <div v-if="!loading && !error" class="projects__more">
         <router-link to="/projects" class="btn btn--outline">View All Projects</router-link>
       </div>
     </div>

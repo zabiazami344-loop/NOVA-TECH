@@ -1,5 +1,3 @@
-import orbitRideImage from '@/assets/images/orbitride-cover.svg'
-
 /**
  * The project catalogue - 12 projects, copied verbatim from the original
  * js/projects.js `projectsData` array.
@@ -9,7 +7,7 @@ import orbitRideImage from '@/assets/images/orbitride-cover.svg'
  *   name            string   card + modal title
  *   category        string   web | mobile | ai | security
  *   imageText       string   the big gradient label (BRIGHT, ORBIT, ...)
- *   image           string   remote thumbnail used by project cards
+ *   image           string   project thumbnail used by project cards
  *   description     string   short line on the card
  *   longDescription string   the paragraph shown in the modal
  *   technologies    string[] 3-5 chips on the card
@@ -61,7 +59,7 @@ export const projects = [
     name: 'OrbitRide Ride-Hailing App',
     category: 'mobile',
     imageText: 'ORBIT',
-    image: orbitRideImage,
+    image: '/images/orbitride-cover.svg',
     description: 'A ride-hailing mobile app with live tracking and instant booking.',
     longDescription:
       'Drivers and riders connect through real-time GPS, in-app payments and a smart dispatch engine. Over 100k rides booked in the first year.',

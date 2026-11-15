@@ -6,6 +6,7 @@
   "description": "NOVA TECH - Vue 3 conversion of the original HTML/CSS/vanilla JS website",
   "scripts": {
     "dev": "vite",
+    "server": "node server/index.js",
     "build": "vite build",
     "preview": "vite preview"
   },
