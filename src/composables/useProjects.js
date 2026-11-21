@@ -1,39 +1,13 @@
 import { ref } from 'vue'
+import { projects as projectCatalogue } from '@/data/projects'
 
-const projects = ref([])
+const projects = ref(projectCatalogue.slice())
 const loading = ref(false)
 const error = ref('')
-let pendingRequest
 
 export function useProjects() {
   function loadProjects() {
-    if (pendingRequest) return pendingRequest
-
-    loading.value = true
-    error.value = ''
-    pendingRequest = fetch('/api/projects')
-      .then(async (response) => {
-        if (!response.ok) {
-          throw new Error(`Projects request failed (${response.status})`)
-        }
-
-        const data = await response.json()
-        if (!Array.isArray(data)) {
-          throw new Error('Projects API returned an invalid response')
-        }
-
-        projects.value = data
-      })
-      .catch((requestError) => {
-        error.value = 'Could not load projects. Make sure the backend server is running, then refresh the page.'
-        console.error('Could not load projects from the API:', requestError)
-      })
-      .finally(() => {
-        loading.value = false
-        pendingRequest = undefined
-      })
-
-    return pendingRequest
+    return Promise.resolve(projects.value)
   }
 
   return { projects, loading, error, loadProjects }

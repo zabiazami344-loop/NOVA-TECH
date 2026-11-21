@@ -5,11 +5,6 @@ import vue from '@vitejs/plugin-vue'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  server: {
-    proxy: {
-      '/api': 'http://127.0.0.1:3001',
-    },
-  },
   resolve: {
     alias: {
       // Lets you write `import X from '@/components/NavBar.vue'` instead of
