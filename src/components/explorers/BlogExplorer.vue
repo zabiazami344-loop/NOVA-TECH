@@ -46,9 +46,10 @@ const { search, filter, filteredItems, isEmpty } = useExplore(ref(articles), {
 
       <div class="blog__grid">
         <BlogCard
-          v-for="article in filteredItems"
+          v-for="(article, index) in filteredItems"
           :key="article.id"
           :article="article"
+          :reveal-delay="index < 3 ? index + 1 : 0"
         />
       </div>
 

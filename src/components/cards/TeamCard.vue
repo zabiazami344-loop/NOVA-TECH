@@ -12,6 +12,7 @@ import MemberDetailModal from '@/components/modals/MemberDetailModal.vue'
  */
 defineProps({
   member: { type: Object, required: true },
+  revealDelay: { type: Number, default: 0 },
 })
 
 const { openModal } = useModal()
@@ -22,7 +23,7 @@ function showProfile(member) {
 </script>
 
 <template>
-  <article class="team-card card-enter">
+  <article v-reveal="revealDelay" class="team-card">
     <!--
       Not an <img>: the project has no photos, so the initials are shown as
       large text, exactly as the original did.

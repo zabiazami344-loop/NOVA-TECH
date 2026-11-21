@@ -12,15 +12,15 @@ import BlogExplorer from '@/components/explorers/BlogExplorer.vue'
   <PageHero
     title="Blog & Insights"
     crumb="Blog"
-    desc="Ideas, lessons and behind-the-scenes stories from our engineering, design, AI and security teams."
+    desc="Explore editorial topics across software engineering, design, AI and security."
   />
 
   <BlogExplorer />
 
   <CtaStrip
-    title="Want To Work With Us?"
-    desc="Explore our open roles or start a conversation."
-    cta="See Careers"
-    to="/careers"
+    title="Explore the Portfolio Preview"
+    desc="Browse example product concepts across our service areas."
+    cta="View Projects"
+    to="/projects"
   />
 </template>

@@ -10,6 +10,7 @@ import ArticleDetailModal from '@/components/modals/ArticleDetailModal.vue'
  */
 defineProps({
   article: { type: Object, required: true },
+  revealDelay: { type: Number, default: 0 },
 })
 
 const { openModal } = useModal()
@@ -20,7 +21,7 @@ function readMore(article) {
 </script>
 
 <template>
-  <article class="blog-card card-enter">
+  <article v-reveal="revealDelay" class="blog-card">
     <div class="blog-card__image">
       <span>{{ article.imageText }}</span>
       <span class="blog-card__category">{{ capitalize(article.category) }}</span>

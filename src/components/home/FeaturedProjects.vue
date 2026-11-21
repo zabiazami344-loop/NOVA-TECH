@@ -59,9 +59,10 @@ const featuredProjects = computed(() => {
       <!-- v-for replaces grid.innerHTML = cardsHtml -->
       <div v-if="!loading && !error" class="projects__grid">
         <ProjectCard
-          v-for="project in featuredProjects"
+          v-for="(project, index) in featuredProjects"
           :key="project.id"
           :project="project"
+          :reveal-delay="index < 3 ? index + 1 : 0"
         />
       </div>
 

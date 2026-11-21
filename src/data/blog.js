@@ -32,7 +32,7 @@ export const articles = [
     description:
       'Slow pages cost money. Here are the ten performance habits we apply to every single project.',
     content:
-      'Performance is a feature. In this article we walk through real-world improvements: honest image sizing, avoiding render-blocking scripts, caching strategies, predictable server responses and measuring everything with real-user metrics. The good news is that most sites are slow for the same ten reasons, so fixing those gives you 90% of the win.',
+      'Performance is a feature. This article covers practical improvements: honest image sizing, avoiding render-blocking scripts, caching strategies, predictable server responses and measuring real-user metrics. Many sites share common performance bottlenecks, so addressing those is a useful place to start.',
   },
   {
     id: 2,
@@ -106,7 +106,7 @@ export const articles = [
   },
   {
     id: 7,
-    title: 'From Two Laptops To 50 Engineers: Our Story',
+    title: 'Building a Sustainable Software Team',
     category: 'company',
     imageText: 'STORY',
     author: 'Michael Carter',
@@ -114,9 +114,9 @@ export const articles = [
     date: 'Oct 30, 2025',
     readTime: 9,
     description:
-      'A decade of NOVA TECH in one post: the wins, the pivots and the lessons.',
+      'Practical considerations for growing an engineering team without losing focus.',
     content:
-      'Ten years ago we were two people and one desk. This is the honest version of the journey — where we got lucky, where we got it wrong and the handful of principles we would never trade for a bigger office.',
+      'As teams grow, communication, ownership and technical consistency become more important. This article explores ways to add structure without slowing down collaboration or losing sight of the product.',
   },
   {
     id: 8,

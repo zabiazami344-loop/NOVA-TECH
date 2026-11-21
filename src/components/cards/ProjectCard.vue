@@ -15,6 +15,7 @@ import ProjectDetailModal from '@/components/modals/ProjectDetailModal.vue'
  */
 defineProps({
   project: { type: Object, required: true },
+  revealDelay: { type: Number, default: 0 },
 })
 
 const { openModal } = useModal()
@@ -26,7 +27,7 @@ function showDetails(project) {
 </script>
 
 <template>
-  <article class="project-card card-enter" :data-category="project.category">
+  <article v-reveal="revealDelay" class="project-card" :data-category="project.category">
     <div class="project-card__image">
       <img
         class="project-card__thumbnail"

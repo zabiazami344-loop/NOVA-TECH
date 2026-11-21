@@ -64,6 +64,21 @@
   to { background-position: 40px 40px; }
 }
 
+@keyframes heroAmbientDrift {
+  0%, 100% { background-position: 0 0, 100% 100%; }
+  50% { background-position: 100% 35%, 0 65%; }
+}
+
+@keyframes badgePulse {
+  0%, 100% { opacity: 0.8; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Soft pulsing glow for hero core */
 @keyframes pulseGlow {
   0%, 100% {
@@ -93,11 +108,25 @@
    2. HERO ENTRANCE ANIMATIONS
    -------------------------------------------------------------------------- */
 .hero__badge { animation: fadeIn 0.7s ease 0.1s both; }
+.hero__badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  box-shadow: 0 0 12px var(--color-primary-light);
+  animation: badgePulse 2.4s ease-in-out infinite;
+}
 .hero__title  { animation: slideInLeft 0.8s ease 0.15s both; }
 .hero__subtitle { animation: slideInLeft 0.8s ease 0.3s both; }
 .hero__buttons { animation: slideInLeft 0.8s ease 0.45s both; }
 .hero__stats { animation: fadeIn 0.9s ease 0.6s both; }
 .hero__visual { animation: heroVisualEnter 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) 0.25s both; }
+.hero__background {
+  background-size: 180% 180%;
+  animation: heroAmbientDrift 18s ease-in-out infinite;
+}
 .tech-visual__grid { animation: gridDrift 10s linear infinite; }
 .tech-visual__ring--1 { animation-duration: 14s; }
 .tech-visual__ring--2 { animation-duration: 22s; }
@@ -112,6 +141,11 @@
 /* Background orbs animation - applied via body pseudo-elements */
 body::before { animation: orbFloat1 30s ease-in-out infinite; }
 body::after { animation: orbFloat2 36s ease-in-out infinite reverse; }
+
+/* Re-keying this shell animates route changes without delaying lazy views. */
+.page-transition-shell {
+  animation: pageEnter 260ms ease both;
+}
 
 /* --------------------------------------------------------------------------
    3. SCROLL REVEAL

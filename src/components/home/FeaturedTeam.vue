@@ -24,9 +24,10 @@ import { featuredMembers } from '@/data/team'
       -->
       <div class="team__grid">
         <TeamCard
-          v-for="member in featuredMembers"
+          v-for="(member, index) in featuredMembers"
           :key="member.id"
           :member="member"
+          :reveal-delay="index < 3 ? index + 1 : 0"
         />
       </div>
 

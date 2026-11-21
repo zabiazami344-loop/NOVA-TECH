@@ -16,12 +16,11 @@ const showChrome = computed(() => route.meta.chrome !== false)
 <template>
   <NavBar v-if="showChrome" />
 
-  <!--
-    <router-view /> is the placeholder for "whichever view matches the current
-    URL". It uses the default slot, so each view must have exactly ONE root
-    element.
-  -->
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <div :key="route.fullPath" class="page-transition-shell">
+      <component :is="Component" />
+    </div>
+  </router-view>
 
   <SiteFooter v-if="showChrome" />
 

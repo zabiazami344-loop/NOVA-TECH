@@ -111,9 +111,10 @@ const visibleProjects = computed(() =>
             what keeps the reveal animations attached to the right elements.
           -->
           <ProjectCard
-            v-for="project in visibleProjects"
+            v-for="(project, index) in visibleProjects"
             :key="project.id"
             :project="project"
+            :reveal-delay="index < 3 ? index + 1 : 0"
           />
         </div>
 
