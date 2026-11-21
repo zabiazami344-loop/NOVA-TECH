@@ -52,8 +52,7 @@ function openMessages() {
         </span>
       </button>
 
-      <span class="topbar__avatar">{{ initial }}</span>
-      <span>{{ user.email }}</span>
+      <span class="topbar__avatar" :title="`${user.name} · ${user.email}`">{{ initial }}</span>
 
       <button type="button" class="btn btn--ghost btn--sm" @click="$emit('logout')">Logout</button>
     </div>
