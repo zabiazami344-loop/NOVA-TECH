@@ -1,4 +1,5 @@
 <script setup>
+import { nextTick, onMounted } from 'vue'
 import MessageItem from '@/components/dashboard/MessageItem.vue'
 import { useDashboard } from '@/composables/useDashboard'
 
@@ -11,7 +12,11 @@ import { useDashboard } from '@/composables/useDashboard'
  * the Overview panel - so a visitor submitting the contact form updates both the
  * list here and the "Messages" stat card at the same time.
  */
-const { messages } = useDashboard()
+const { messages, markMessagesRead, isMessageUnread } = useDashboard()
+
+onMounted(() => {
+  nextTick(markMessagesRead)
+})
 </script>
 
 <template>
@@ -27,6 +32,7 @@ const { messages } = useDashboard()
       v-for="message in messages"
       :key="message.id ?? message.createdAt + message.email"
       :message="message"
+      :unread="isMessageUnread(message)"
     />
   </div>
 </template>

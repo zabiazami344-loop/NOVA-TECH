@@ -15,7 +15,7 @@ import { useDashboard } from '@/composables/useDashboard'
  * via `stats[card.source]`, so a new card is one line of data, not a new id in
  * the HTML plus a new line in dashboard.js.
  */
-const { overviewStats, recentProjects, recentMessages } = useDashboard()
+const { overviewStats, recentProjects, recentMessages, unreadCount, isMessageUnread } = useDashboard()
 </script>
 
 <template>
@@ -23,7 +23,11 @@ const { overviewStats, recentProjects, recentMessages } = useDashboard()
     <div v-for="card in overviewCards" :key="card.id" class="dash-card">
       <div class="dash-card__label">{{ card.label }}</div>
       <div class="dash-card__value">{{ overviewStats[card.source] }}</div>
-      <div class="dash-card__trend">{{ card.trend }}</div>
+      <div class="dash-card__trend">
+        {{ card.id === 'messages'
+          ? `${unreadCount} unread`
+          : card.trend }}
+      </div>
     </div>
   </div>
 
@@ -64,6 +68,7 @@ const { overviewStats, recentProjects, recentMessages } = useDashboard()
         v-for="message in recentMessages"
         :key="message.id ?? message.createdAt + message.email"
         :message="message"
+        :unread="isMessageUnread(message)"
       />
     </div>
   </div>

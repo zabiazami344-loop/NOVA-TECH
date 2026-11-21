@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import ThemeToggle from '@/components/layout/ThemeToggle.vue'
 import { panelTitles } from '@/data/dashboard'
+import { useDashboard } from '@/composables/useDashboard'
 
 /**
  * DashboardTopbar - the title bar above the panels.
@@ -19,10 +20,15 @@ const props = defineProps({
   activePanel: { type: String, required: true },
 })
 
-defineEmits(['logout'])
+const emit = defineEmits(['logout', 'select'])
+const { unreadCount } = useDashboard()
 
 const title = computed(() => panelTitles[props.activePanel] ?? 'Dashboard')
 const initial = computed(() => props.user.name.charAt(0).toUpperCase())
+
+function openMessages() {
+  emit('select', 'messages')
+}
 </script>
 
 <template>
@@ -32,6 +38,19 @@ const initial = computed(() => props.user.name.charAt(0).toUpperCase())
     <div class="topbar__user">
       <!-- The dashboard has its own dark-mode button, same as the original. -->
       <ThemeToggle />
+
+      <button
+        type="button"
+        class="notification-button"
+        :aria-label="unreadCount ? `${unreadCount} unread messages` : 'No unread messages'"
+        title="Messages"
+        @click="openMessages"
+      >
+        <span aria-hidden="true">🔔</span>
+        <span v-if="unreadCount" class="notification-button__badge">
+          {{ unreadCount > 99 ? '99+' : unreadCount }}
+        </span>
+      </button>
 
       <span class="topbar__avatar">{{ initial }}</span>
       <span>{{ user.email }}</span>

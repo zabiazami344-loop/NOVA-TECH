@@ -1,5 +1,6 @@
 <script setup>
 import { sidebarGroups } from '@/data/dashboard'
+import { useDashboard } from '@/composables/useDashboard'
 
 /**
  * DashboardSidebar - the left-hand navigation.
@@ -22,6 +23,7 @@ defineProps({
 })
 
 const emit = defineEmits(['select', 'logout'])
+const { unreadCount } = useDashboard()
 
 /** Routes a click to the right event: the logout link is an action, not a panel. */
 function onLinkClick(link) {
@@ -53,7 +55,15 @@ function onLinkClick(link) {
           }"
           @click="onLinkClick(link)"
         >
-          <span aria-hidden="true">{{ link.icon }}</span> {{ link.label }}
+          <span aria-hidden="true">{{ link.icon }}</span>
+          <span class="sidebar__link-label">{{ link.label }}</span>
+          <span
+            v-if="link.id === 'messages' && unreadCount > 0"
+            class="sidebar__badge"
+            :aria-label="`${unreadCount} unread messages`"
+          >
+            {{ unreadCount > 99 ? '99+' : unreadCount }}
+          </span>
         </button>
       </template>
     </nav>

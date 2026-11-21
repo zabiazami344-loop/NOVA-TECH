@@ -52,14 +52,23 @@ function onLogout() {
   logout()
   router.push('/login')
 }
+
+function onSelectPanel(panel) {
+  activePanel.value = panel
+}
 </script>
 
 <template>
   <div class="dashboard">
-    <DashboardSidebar :active-panel="activePanel" @select="activePanel = $event" @logout="onLogout" />
+    <DashboardSidebar :active-panel="activePanel" @select="onSelectPanel" @logout="onLogout" />
 
     <main class="dashboard__main">
-      <DashboardTopbar :user="currentUser" :active-panel="activePanel" @logout="onLogout" />
+      <DashboardTopbar
+        :user="currentUser"
+        :active-panel="activePanel"
+        @logout="onLogout"
+        @select="onSelectPanel"
+      />
 
       <!--
         One <component :is> instead of eight <section> elements each toggling a

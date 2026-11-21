@@ -26,8 +26,11 @@ const STORAGE_KEY = 'novatech_contact_messages'
 const values = reactive({})
 const errors = reactive({})
 const successVisible = ref(false)
+const isSubmitting = ref(false)
+const submittedName = ref('')
 
 let successTimer = null
+let submitTimer = null
 
 /** Validates a single field and stores the message (or ''). */
 function validateOne(key) {
@@ -40,6 +43,8 @@ function clearError(key) {
 }
 
 function onSubmit() {
+  if (isSubmitting.value) return
+
   // No event.preventDefault() - @submit.prevent does it.
   let errorCount = 0
   let firstBadKey = null
@@ -65,9 +70,16 @@ function onSubmit() {
     return
   }
 
-  save(values)
-  resetForm()
-  showSuccess()
+  submittedName.value = values.name.trim()
+  isSubmitting.value = true
+
+  submitTimer = setTimeout(() => {
+    save(values)
+    window.dispatchEvent(new CustomEvent('novatech:contact-message'))
+    resetForm()
+    isSubmitting.value = false
+    showSuccess()
+  }, 550)
 }
 
 /**
@@ -114,10 +126,18 @@ function showSuccess() {
   clearTimeout(successTimer)
   successTimer = setTimeout(() => {
     successVisible.value = false
-  }, 6000)
+  }, 8000)
 }
 
-onBeforeUnmount(() => clearTimeout(successTimer))
+function dismissSuccess() {
+  successVisible.value = false
+  clearTimeout(successTimer)
+}
+
+onBeforeUnmount(() => {
+  clearTimeout(successTimer)
+  clearTimeout(submitTimer)
+})
 </script>
 
 <template>
@@ -128,8 +148,26 @@ onBeforeUnmount(() => clearTimeout(successTimer))
       v-show rather than v-if: the original added/removed a .show class on an
       always-present element, and the CSS may animate it.
     -->
-    <div v-show="successVisible" class="form__success" role="status">
-      Thank you! Your message has been received. We will reply within 24 hours.
+    <div
+      v-show="successVisible"
+      class="form__success"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <div class="form__success-icon" aria-hidden="true">✓</div>
+      <div class="form__success-copy">
+        <strong>Message sent successfully!</strong>
+        <span>Thank you{{ submittedName ? `, ${submittedName}` : '' }}. We’ll reply within 24 hours.</span>
+      </div>
+      <button
+        type="button"
+        class="form__success-close"
+        aria-label="Dismiss success message"
+        @click="dismissSuccess"
+      >
+        ×
+      </button>
     </div>
 
     <!-- novalidate: we validate ourselves, so the browser's bubbles are off -->
@@ -154,6 +192,7 @@ onBeforeUnmount(() => clearTimeout(successTimer))
           <select
             v-if="field.type === 'select'"
             :id="`contact-${field.key}`"
+            :ref="(el) => setFieldRef(field.key, el)"
             v-model="values[field.key]"
             class="form__select"
             @blur="validateOne(field.key)"
@@ -219,7 +258,10 @@ onBeforeUnmount(() => clearTimeout(successTimer))
         <p class="form__error">{{ errors[field.key] }}</p>
       </div>
 
-      <button type="submit" class="btn btn--primary btn--full">Send Message</button>
+      <button type="submit" class="btn btn--primary btn--full" :disabled="isSubmitting">
+        <span v-if="isSubmitting" class="form__spinner" aria-hidden="true"></span>
+        {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+      </button>
     </form>
   </div>
 </template>

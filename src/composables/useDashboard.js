@@ -5,6 +5,7 @@ import {
   initialProjects,
   baseStats,
   sampleMessages,
+  CONTACT_MESSAGES_KEY,
 } from '@/data/dashboard'
 
 /**
@@ -55,11 +56,44 @@ watch(projects, (value) => writeStorage(PROJECTS_KEY, value), { deep: true })
  * Reactive, so the Messages panel and the Overview card update together.
  */
 const storedMessages = ref(readStorage('novatech_contact_messages', []))
+const READ_MESSAGES_KEY = 'novatech_read_contact_messages'
+const readMessageIds = ref(readStorage(READ_MESSAGES_KEY, []))
+
+function refreshMessages() {
+  const stored = readStorage(CONTACT_MESSAGES_KEY, [])
+  storedMessages.value = Array.isArray(stored) ? stored : []
+  const readIds = readStorage(READ_MESSAGES_KEY, [])
+  readMessageIds.value = Array.isArray(readIds) ? readIds : []
+}
+
+function markMessagesRead() {
+  const realMessages = Array.isArray(storedMessages.value) ? storedMessages.value : []
+  const ids = realMessages.map((message) => message.id).filter(Boolean)
+  readMessageIds.value = ids
+  writeStorage(READ_MESSAGES_KEY, ids)
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('storage', (event) => {
+    if (event.key === CONTACT_MESSAGES_KEY || event.key === READ_MESSAGES_KEY) refreshMessages()
+  })
+  window.addEventListener('novatech:contact-message', refreshMessages)
+}
 
 const messages = computed(() => {
   const list = storedMessages.value
   return Array.isArray(list) && list.length > 0 ? list : sampleMessages
 })
+
+const unreadCount = computed(() => {
+  if (!Array.isArray(storedMessages.value) || storedMessages.value.length === 0) return 0
+  const readIds = new Set(readMessageIds.value)
+  return storedMessages.value.filter((message) => !readIds.has(message.id)).length
+})
+
+function isMessageUnread(message) {
+  return Boolean(message.id) && !readMessageIds.value.includes(message.id)
+}
 
 /**
  * Total Projects = the company base count (150) plus the difference between the
@@ -122,6 +156,10 @@ export function useDashboard() {
     overviewStats,
     recentProjects,
     recentMessages,
+    unreadCount,
+    isMessageUnread,
+    markMessagesRead,
+    refreshMessages,
     setProjectStatus,
     deleteProject,
     addProject,

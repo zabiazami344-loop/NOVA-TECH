@@ -10,11 +10,12 @@ import { formatDate } from '@/utils/strings'
  */
 defineProps({
   message: { type: Object, required: true },
+  unread: { type: Boolean, default: false },
 })
 </script>
 
 <template>
-  <div class="message-list__item">
+  <div class="message-list__item" :class="{ 'message-list__item--unread': unread }">
     <div>
       <div class="message-list__info">
         <strong>{{ message.name }} ({{ message.email }})</strong>
@@ -22,5 +23,6 @@ defineProps({
       </div>
       <p class="message-list__text">{{ message.text }}</p>
     </div>
+    <span v-if="unread" class="message-list__new">New</span>
   </div>
 </template>
