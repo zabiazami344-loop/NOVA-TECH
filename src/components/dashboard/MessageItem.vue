@@ -1,5 +1,7 @@
 <script setup>
 import { formatDate } from '@/utils/strings'
+import { useModal } from '@/composables/useModal'
+import MessageDetailModal from '@/components/modals/MessageDetailModal.vue'
 
 /**
  * MessageItem - one row in a message list.
@@ -12,10 +14,23 @@ defineProps({
   message: { type: Object, required: true },
   unread: { type: Boolean, default: false },
 })
+
+const { openModal } = useModal()
+
+function openMessage(message) {
+  openModal(MessageDetailModal, { message })
+}
+
 </script>
 
 <template>
-  <div class="message-list__item" :class="{ 'message-list__item--unread': unread }">
+  <button
+    type="button"
+    class="message-list__item"
+    :class="{ 'message-list__item--unread': unread }"
+    :aria-label="`Open message from ${message.name}`"
+    @click="openMessage(message)"
+  >
     <div>
       <div class="message-list__info">
         <strong>{{ message.name }} ({{ message.email }})</strong>
@@ -24,5 +39,5 @@ defineProps({
       <p class="message-list__text">{{ message.text }}</p>
     </div>
     <span v-if="unread" class="message-list__new">New</span>
-  </div>
+  </button>
 </template>
