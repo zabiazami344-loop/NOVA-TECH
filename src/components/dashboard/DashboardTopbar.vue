@@ -46,13 +46,16 @@ function openMessages() {
         title="Messages"
         @click="openMessages"
       >
-        <span aria-hidden="true">🔔</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" />
+          <path d="M10 21h4" />
+        </svg>
         <span v-if="unreadCount" class="notification-button__badge">
           {{ unreadCount > 99 ? '99+' : unreadCount }}
         </span>
       </button>
 
-      <span class="topbar__avatar" :title="`${user.name} · ${user.email}`">{{ initial }}</span>
+      <span class="topbar__avatar" :title="user.name" :aria-label="`Signed in as ${user.name}`">{{ initial }}</span>
 
       <button type="button" class="btn btn--ghost btn--sm" @click="$emit('logout')">Logout</button>
     </div>

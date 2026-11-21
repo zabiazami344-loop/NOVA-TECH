@@ -8,7 +8,7 @@ import TeamExplorer from '@/components/explorers/TeamExplorer.vue'
   <PageHero
     title="Meet The Team"
     crumb="Team"
-    desc="Fifty-plus curious engineers, designers and specialists — these are the people behind every NOVA TECH product."
+    desc="Meet the engineers, designers and specialists who shape NOVA TECH products."
   />
 
   <TeamExplorer />

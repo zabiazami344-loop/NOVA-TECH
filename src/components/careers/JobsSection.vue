@@ -7,23 +7,13 @@ import { jobs } from '@/data/careers'
 <template>
   <section class="jobs section-pad">
     <div class="container">
-      <SectionHead tag="Open Roles" title="We Are Hiring" />
+      <SectionHead tag="Example Roles" title="Career Page Preview" />
 
-      <!--
-        The original hardcoded "Currently 7 open positions" in the description.
-        Deriving it from jobs.length means the sentence can never drift out of
-        sync with the actual list - add a role and it updates itself.
-      -->
-      <p class="section-head__desc">
-        Currently {{ jobs.length }} open positions across engineering, design, AI, security and
-        delivery.
+      <p class="content-disclosure">
+        These sample role descriptions are for layout preview only. No vacancies or application system are configured.
       </p>
 
       <div class="jobs-grid">
-        <!--
-          77 lines of hand-written HTML became 6. The seven cards differed only
-          in five data fields, so there was never a reason to write them out.
-        -->
         <JobCard v-for="job in jobs" :key="job.id" :job="job" />
       </div>
     </div>

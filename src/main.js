@@ -16,6 +16,8 @@ import './assets/css/style.css'
 import './assets/css/animations.css'
 import './assets/css/responsive.css'
 import './assets/css/polish.css'
+import './assets/css/admin.css'
+import './assets/css/public.css'
 
 const app = createApp(App)
 

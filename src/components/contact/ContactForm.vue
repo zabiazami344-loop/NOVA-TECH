@@ -28,6 +28,7 @@ const errors = reactive({})
 const successVisible = ref(false)
 const isSubmitting = ref(false)
 const submittedName = ref('')
+const submissionError = ref('')
 
 let successTimer = null
 let submitTimer = null
@@ -44,6 +45,7 @@ function clearError(key) {
 
 function onSubmit() {
   if (isSubmitting.value) return
+  submissionError.value = ''
 
   // No event.preventDefault() - @submit.prevent does it.
   let errorCount = 0
@@ -74,8 +76,16 @@ function onSubmit() {
   isSubmitting.value = true
 
   submitTimer = setTimeout(() => {
-    save(values)
-    window.dispatchEvent(new CustomEvent('novatech:contact-message'))
+    const savedMessage = save(values)
+    if (!savedMessage) {
+      isSubmitting.value = false
+      submissionError.value = 'We could not save your message in this browser. Please try again.'
+      return
+    }
+
+    window.dispatchEvent(new CustomEvent('novatech:contact-message', {
+      detail: { message: savedMessage },
+    }))
     resetForm()
     isSubmitting.value = false
     showSuccess()
@@ -100,18 +110,19 @@ function save(data) {
 
   // unshift() puts the newest at the front, which is what the dashboard's
   // message panel expects to display first.
-  messages.unshift({
+  const message = {
     id: Date.now(),
     name: data.name.trim(),
     email: data.email.trim(),
-    phone: data.phone.trim(),
+    phone: String(data.phone ?? '').trim(),
     service: data.service,
     subject: data.subject.trim(),
     text: data.message.trim(),
     createdAt: new Date().toISOString(),
-  })
+  }
+  messages.unshift(message)
 
-  writeStorage(STORAGE_KEY, messages)
+  return writeStorage(STORAGE_KEY, messages) ? message : null
 }
 
 function resetForm() {
@@ -157,8 +168,11 @@ onBeforeUnmount(() => {
     >
       <div class="form__success-icon" aria-hidden="true">✓</div>
       <div class="form__success-copy">
-        <strong>Message sent successfully!</strong>
-        <span>Thank you{{ submittedName ? `, ${submittedName}` : '' }}. We’ll reply within 24 hours.</span>
+        <strong>Message saved in this browser</strong>
+        <span>
+          Thank you{{ submittedName ? `, ${submittedName}` : '' }}.
+          This demo does not deliver messages to NOVATECH.
+        </span>
       </div>
       <button
         type="button"
@@ -260,8 +274,12 @@ onBeforeUnmount(() => {
 
       <button type="submit" class="btn btn--primary btn--full" :disabled="isSubmitting">
         <span v-if="isSubmitting" class="form__spinner" aria-hidden="true"></span>
-        {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+        {{ isSubmitting ? 'Saving...' : 'Save Inquiry' }}
       </button>
     </form>
+
+    <p v-if="submissionError" class="form__failure" role="alert">
+      {{ submissionError }}
+    </p>
   </div>
 </template>

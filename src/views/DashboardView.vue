@@ -12,6 +12,7 @@ import IntentsPanel from '@/components/dashboard/panels/IntentsPanel.vue'
 import MessagesPanel from '@/components/dashboard/panels/MessagesPanel.vue'
 import UsersPanel from '@/components/dashboard/panels/UsersPanel.vue'
 import SettingsPanel from '@/components/dashboard/panels/SettingsPanel.vue'
+import { useDashboard } from '@/composables/useDashboard'
 
 /**
  * DashboardView - the admin area.
@@ -30,6 +31,7 @@ import SettingsPanel from '@/components/dashboard/panels/SettingsPanel.vue'
  */
 const router = useRouter()
 const { currentUser, logout } = useAuth()
+const { storageError } = useDashboard()
 
 const activePanel = ref('overview')
 
@@ -59,16 +61,28 @@ function onSelectPanel(panel) {
 </script>
 
 <template>
-  <div class="dashboard">
-    <DashboardSidebar :active-panel="activePanel" @select="onSelectPanel" @logout="onLogout" />
+  <div class="dashboard dashboard--premium">
+    <DashboardSidebar
+      v-if="currentUser"
+      :active-panel="activePanel"
+      :user="currentUser"
+      @select="onSelectPanel"
+      @logout="onLogout"
+    />
 
     <main class="dashboard__main">
       <DashboardTopbar
+        v-if="currentUser"
         :user="currentUser"
         :active-panel="activePanel"
         @logout="onLogout"
         @select="onSelectPanel"
       />
+
+      <div v-if="storageError" class="dashboard__storage-error" role="alert">
+        <strong>Browser storage is unavailable.</strong>
+        <span>Some dashboard changes may not be saved in this browser session.</span>
+      </div>
 
       <!--
         One <component :is> instead of eight <section> elements each toggling a
@@ -77,9 +91,11 @@ function onSelectPanel(panel) {
         The router guard guarantees currentUser exists by the time this renders,
         but the v-if is a cheap safety net.
       -->
-      <section v-if="currentUser" class="panel active">
-        <component :is="activeComponent" />
-      </section>
+      <Transition name="dashboard-panel" mode="out-in">
+        <section v-if="currentUser" :key="activePanel" class="panel active">
+          <component :is="activeComponent" />
+        </section>
+      </Transition>
     </main>
   </div>
 </template>

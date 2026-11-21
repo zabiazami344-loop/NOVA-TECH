@@ -36,10 +36,28 @@ export function matchesTerm(haystack, needle) {
 /** Formats an ISO date string the way the dashboard's message list did. */
 export function formatDate(value) {
   try {
-    return new Date(value).toLocaleDateString(undefined, {
+    const date = new Date(value)
+    if (Number.isNaN(date.getTime())) return 'Unknown date'
+    return date.toLocaleDateString(undefined, {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
+    })
+  } catch (error) {
+    return 'Unknown date'
+  }
+}
+
+export function formatDateTime(value) {
+  try {
+    const date = new Date(value)
+    if (Number.isNaN(date.getTime())) return 'Unknown date'
+    return date.toLocaleString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
     })
   } catch (error) {
     return 'Unknown date'

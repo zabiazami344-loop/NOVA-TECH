@@ -2674,6 +2674,16 @@ html[data-theme="dark"] .theme-toggle .theme-toggle__icon--sun {
   animation: form-success-in 0.28s ease-out;
 }
 
+.form__failure {
+  padding: 12px 14px;
+  margin-top: 16px;
+  border: 1px solid rgba(255, 69, 58, 0.28);
+  border-radius: var(--radius-sm);
+  color: #b42318;
+  background: rgba(255, 69, 58, 0.08);
+  font-size: var(--size-sm);
+}
+
 .form__success-icon {
   display: grid;
   flex: 0 0 36px;
@@ -3451,6 +3461,26 @@ html[data-theme="dark"] .theme-toggle .theme-toggle__icon--sun {
 
 .message-list__item:hover {
   border-color: var(--glass-border-hover);
+}
+
+.message-list__item-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.message-list__details {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  color: var(--color-primary-light);
+  font-size: var(--size-sm);
+  font-weight: 600;
+}
+
+.message-list__item:hover .message-list__details {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .message-list__item--unread {

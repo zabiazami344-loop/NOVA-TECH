@@ -1,5 +1,6 @@
 <script setup>
 import Badge from '@/components/ui/Badge.vue'
+import DashboardIcon from '@/components/dashboard/DashboardIcon.vue'
 import { intents } from '@/data/dashboard'
 
 /**
@@ -14,14 +15,16 @@ import { intents } from '@/data/dashboard'
 <template>
   <div class="panel__header">
     <div>
-      <h2 class="panel__title">Intents</h2>
-      <p class="panel__sub">Chatbot intents configured in the AI assistant.</p>
+      <h2 class="panel__title">Intent Catalogue</h2>
+      <p class="panel__sub">Sample configuration; no live chatbot is connected.</p>
     </div>
   </div>
 
   <div class="dash-intents">
     <div v-for="intent in intents" :key="intent.name" class="dash-intents__item">
-      <span class="dash-intents__icon" aria-hidden="true">{{ intent.icon }}</span>
+      <span class="dash-intents__icon">
+        <DashboardIcon :name="intent.icon" />
+      </span>
       <div>
         <h4>{{ intent.name }}</h4>
         <p>{{ intent.desc }}</p>

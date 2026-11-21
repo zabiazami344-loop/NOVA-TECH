@@ -39,8 +39,12 @@ const featuredProjects = computed(() => {
       <SectionHead
         tag="Our Work"
         title="Featured Projects"
-        desc="A selection of products we have designed and engineered for clients around the world."
+        desc="A showcase of example product concepts across web, mobile, AI and security."
       />
+
+      <p class="content-disclosure">
+        These portfolio entries are sample content, not verified client case studies.
+      </p>
 
       <!--
         v-model on a component = :model-value + @update:model-value.

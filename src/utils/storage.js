@@ -89,3 +89,5 @@ export function removeSession(key) {
 
 /** False when the browser refuses to store anything (private mode, blocked). */
 export const storageAvailable = localOK || sessionOK
+/** Whether persistent local data (projects and contact messages) is available. */
+export const localStorageAvailable = localOK

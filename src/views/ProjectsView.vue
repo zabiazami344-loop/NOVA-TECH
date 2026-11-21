@@ -12,7 +12,7 @@ import ProjectsExplorer from '@/components/explorers/ProjectsExplorer.vue'
   -->
   <PageHero
     title="Our Projects"
-    desc="Real products we have designed, built and shipped for clients across web, mobile, AI and cyber security."
+    desc="Explore example product concepts across web, mobile, AI and cyber security."
   />
 
   <ProjectsExplorer />

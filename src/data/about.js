@@ -8,14 +8,14 @@
  * Everything below is that markup, turned into data.
  */
 
-/** The "From Two Developers To A Global Team" story block. */
+/** General company-introduction copy without unverified history or metrics. */
 export const aboutStory = {
-  visualLabel: 'Our Journey',
+  visualLabel: 'Product Engineering',
   tag: 'Our Story',
-  title: 'From Two Developers To A Global Team',
+  title: 'Technology Built Around Real Needs',
   paragraphs: [
-    'NOVA TECH was founded in 2015 in a small shared office with just two laptops and a single mission: prove that small teams can ship software large companies would be proud of.',
-    'Ten years later we are a 50+ person company with engineers, designers, data scientists and security specialists across 30+ countries. We have delivered over 150 projects — from startup MVPs to enterprise platforms — while keeping the same hands-on, quality-first mindset we started with.',
+    'NOVA TECH brings product design and engineering together to help teams turn complex ideas into useful digital experiences.',
+    'From web and mobile applications to AI, security and cloud systems, the focus is on clear communication, thoughtful decisions and software shaped around real needs.',
   ],
 }
 

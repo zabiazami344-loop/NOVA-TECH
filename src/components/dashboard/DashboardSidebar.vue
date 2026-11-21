@@ -1,6 +1,7 @@
 <script setup>
 import { sidebarGroups } from '@/data/dashboard'
 import { useDashboard } from '@/composables/useDashboard'
+import DashboardIcon from '@/components/dashboard/DashboardIcon.vue'
 
 /**
  * DashboardSidebar - the left-hand navigation.
@@ -20,6 +21,7 @@ import { useDashboard } from '@/composables/useDashboard'
  */
 defineProps({
   activePanel: { type: String, required: true },
+  user: { type: Object, required: true },
 })
 
 const emit = defineEmits(['select', 'logout'])
@@ -42,7 +44,10 @@ function onLinkClick(link) {
 
     <nav class="sidebar__nav">
       <template v-for="group in sidebarGroups" :key="group.title">
-        <p class="sidebar__title">{{ group.title }}</p>
+        <p class="sidebar__title">
+          <span>{{ group.title }}</span>
+          <span class="sidebar__title-rule" aria-hidden="true"></span>
+        </p>
 
         <button
           v-for="link in group.links"
@@ -55,7 +60,9 @@ function onLinkClick(link) {
           }"
           @click="onLinkClick(link)"
         >
-          <span aria-hidden="true">{{ link.icon }}</span>
+          <span class="sidebar__nav-icon">
+            <DashboardIcon :name="link.id === 'logout' ? 'logout' : link.id" />
+          </span>
           <span class="sidebar__link-label">{{ link.label }}</span>
           <span
             v-if="link.id === 'messages' && unreadCount > 0"
@@ -67,5 +74,16 @@ function onLinkClick(link) {
         </button>
       </template>
     </nav>
+
+    <div class="sidebar__profile">
+      <span class="sidebar__profile-avatar" aria-hidden="true">
+        {{ user.name.charAt(0).toUpperCase() }}
+      </span>
+      <span class="sidebar__profile-copy">
+        <strong>{{ user.name }}</strong>
+        <span>{{ user.role || 'Administrator' }}</span>
+      </span>
+      <span class="sidebar__profile-status" aria-label="Online"></span>
+    </div>
   </aside>
 </template>

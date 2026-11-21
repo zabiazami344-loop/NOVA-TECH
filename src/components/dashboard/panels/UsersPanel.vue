@@ -13,7 +13,7 @@ import { sampleUsers } from '@/data/dashboard'
 <template>
   <div class="panel__header">
     <div>
-      <h2 class="panel__title">Users</h2>
+      <h2 class="panel__title">User Directory</h2>
       <p class="panel__sub">Accounts registered in the system (demo data).</p>
     </div>
   </div>

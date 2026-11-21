@@ -31,19 +31,25 @@ const displayName = ref(
 )
 
 const successVisible = ref(false)
+const saveError = ref('')
 let successTimer = null
 
 function onSubmit() {
   const newName = displayName.value.trim()
 
   if (newName === '') {
-    alert('Display name cannot be empty.')
+    successVisible.value = false
+    saveError.value = 'Display name cannot be empty.'
     return
   }
 
-  writeStorage(DISPLAY_NAME_KEY, newName)
-  console.log('Display name saved:', newName)
+  if (!writeStorage(DISPLAY_NAME_KEY, newName)) {
+    successVisible.value = false
+    saveError.value = 'Settings could not be saved in this browser. Please try again.'
+    return
+  }
 
+  saveError.value = ''
   successVisible.value = true
   clearTimeout(successTimer)
   successTimer = setTimeout(() => {
@@ -57,7 +63,7 @@ onBeforeUnmount(() => clearTimeout(successTimer))
 <template>
   <div class="panel__header">
     <div>
-      <h2 class="panel__title">Settings</h2>
+      <h2 class="panel__title">Profile Preferences</h2>
       <p class="panel__sub">Update your profile preferences (demo only).</p>
     </div>
   </div>
@@ -84,6 +90,7 @@ onBeforeUnmount(() => clearTimeout(successTimer))
       <button type="submit" class="btn btn--primary">Save Settings</button>
     </form>
 
+    <p v-if="saveError" class="form__failure" role="alert">{{ saveError }}</p>
     <div v-show="successVisible" class="dash-success">Settings saved successfully.</div>
   </div>
 </template>

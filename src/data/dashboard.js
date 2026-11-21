@@ -4,9 +4,8 @@
  * Everything here was a `const` at the top of the original dashboard.js. Keeping
  * it in one module means the panels stay purely presentational.
  *
- * Icons are \u{...} escapes (with the glyph in a comment) instead of the
- * original's HTML entities, because these are rendered as TEXT by Vue - an
- * entity like '&#128187;' would print literally rather than becoming 💻.
+ * Dashboard icon fields are semantic identifiers rendered by DashboardIcon,
+ * rather than emoji or HTML-entity strings.
  */
 
 /** Where the managed project list is persisted. */
@@ -26,53 +25,16 @@ export const initialProjects = [
   { id: 6, name: 'FitPulse Fitness Tracker', category: 'mobile', client: 'FitPulse', year: 2024, status: 'pending' },
 ]
 
-/** Fixed company-wide numbers. `projects` is a base, adjusted by what you add. */
-export const baseStats = {
-  projects: 150,
-  users: 1248,
-  team: 50,
-  intents: 12,
-  revenue: '$2.4M',
-}
-
 /**
- * The six overview cards.
- *
- * `source` says where each value comes from, so the card component does not
- * need a switch statement - it just renders `value`.
+ * Dashboard cards use actual records and are explicit about seed datasets.
  */
 export const overviewCards = [
-  { id: 'projects', label: 'Total Projects', source: 'totalProjects', trend: '\u{25B2} +8 this year' },
-  { id: 'users', label: 'Total Users', source: 'users', trend: '\u{25B2} +120 this month' },
-  { id: 'messages', label: 'Messages', source: 'messageCount', trend: '\u{25B2} 3 unread' },
-  { id: 'team', label: 'Team Members', source: 'team', trend: '\u{25B2} 2 new hires' },
-  { id: 'intents', label: 'Intents', source: 'intents', trend: '\u{25B2} 6 active now' },
-  { id: 'revenue', label: 'Revenue', source: 'revenue', trend: '\u{25B2} +18% vs last year' },
-]
-
-/** Shown when the contact form has not been submitted yet. */
-export const sampleMessages = [
-  {
-    name: 'Sarah Mitchell',
-    email: 'sarah@brightcart.com',
-    subject: 'E-commerce replatform',
-    text: 'We would love a quote for rebuilding our storefront.',
-    createdAt: '2026-09-02T10:00:00.000Z',
-  },
-  {
-    name: 'James Okafor',
-    email: 'james@finlytics.com',
-    subject: 'AI roadmap',
-    text: 'Interested in a chatbot and predictive analytics pilot.',
-    createdAt: '2026-08-28T09:30:00.000Z',
-  },
-  {
-    name: 'Laura Chen',
-    email: 'laura@meditrust.com',
-    subject: 'Security audit',
-    text: 'Please share your penetration testing packages.',
-    createdAt: '2026-08-21T14:15:00.000Z',
-  },
+  { id: 'projects', label: 'Projects', source: 'projectCount', note: 'Includes demo seed entries', icon: 'projects' },
+  { id: 'services', label: 'Services', source: 'serviceCount', note: 'Service catalogue', icon: 'services' },
+  { id: 'messages', label: 'Messages', source: 'messageCount', note: 'Contact submissions', icon: 'messages' },
+  { id: 'team', label: 'Team', source: 'teamCount', note: 'Sample directory', icon: 'team' },
+  { id: 'users', label: 'Users', source: 'userCount', note: 'Sample accounts', icon: 'users' },
+  { id: 'intents', label: 'Intents', source: 'intentCount', note: 'Sample configuration', icon: 'intents' },
 ]
 
 /** The Users panel table (demo data - not the real login accounts). */
@@ -95,51 +57,29 @@ export const teamMembers = [
   { name: 'David Osei', role: 'AI / ML Engineer', initials: 'DO' },
 ]
 
-/** The Services panel. Note: these are the dashboard's own short blurbs. */
-export const dashboardServices = [
-  { icon: '\u{1F4BB}', // 💻
-    title: 'Web Development',
-    desc: 'Fast, responsive websites and web applications.' },
-  { icon: '\u{1F4F1}', // 📱
-    title: 'Mobile Development',
-    desc: 'Native and cross-platform iOS and Android apps.' },
-  { icon: '\u{1F916}', // 🤖
-    title: 'AI Solutions',
-    desc: 'Machine learning, automation and intelligent products.' },
-  { icon: '\u{1F512}', // 🔒
-    title: 'Cyber Security',
-    desc: 'Audits, penetration testing and hardening.' },
-  { icon: '\u{2601}', // ☁
-    title: 'Cloud Computing',
-    desc: 'Scalable architecture, migration and DevOps.' },
-  { icon: '\u{1F3A8}', // 🎨
-    title: 'UI/UX Design',
-    desc: 'Human-centered, premium product interfaces.' },
-]
-
-/** Chatbot intents. `status` is 'active' or 'training'. */
+/** Chatbot intents. These are sample UI records, not connected to a live bot. */
 export const intents = [
-  { icon: '\u{1F44B}', // 👋
+  { icon: 'greeting',
     name: 'Greeting',
     desc: 'Welcomes visitors and offers help.',
     status: 'active' },
-  { icon: '\u{1F4B0}', // 💰
+  { icon: 'pricing',
     name: 'Pricing',
     desc: 'Answers pricing and package questions.',
     status: 'active' },
-  { icon: '\u{1F4B8}', // 💸
+  { icon: 'refund',
     name: 'Request Refund',
     desc: 'Handles refund policy enquiries.',
     status: 'training' },
-  { icon: '\u{1F4C5}', // 📅
+  { icon: 'booking',
     name: 'Book a Demo',
     desc: 'Schedules product demo calls.',
     status: 'active' },
-  { icon: '\u{1F4AC}', // 💬
+  { icon: 'support',
     name: 'Tech Support',
     desc: 'Escalates issues to human agents.',
     status: 'active' },
-  { icon: '\u{1F3E0}', // 🏠
+  { icon: 'service',
     name: 'Our Services',
     desc: 'Describes NOVA TECH service lines.',
     status: 'training' },
@@ -172,20 +112,20 @@ export const sidebarGroups = [
   {
     title: 'Menu',
     links: [
-      { id: 'overview', label: 'Dashboard', icon: '\u{1F4CA}' }, // 📊
-      { id: 'projects', label: 'Projects', icon: '\u{1F4C2}' }, // 📂
-      { id: 'services', label: 'Services', icon: '\u{1F3E0}' }, // 🏠
-      { id: 'team', label: 'Team', icon: '\u{1F465}' }, // 👥
-      { id: 'intents', label: 'Intents', icon: '\u{1F916}' }, // 🤖
-      { id: 'messages', label: 'Messages', icon: '\u{1F4AC}' }, // 💬
-      { id: 'users', label: 'Users', icon: '\u{1F464}' }, // 👤
-      { id: 'settings', label: 'Settings', icon: '\u2699' }, // ⚙
+      { id: 'overview', label: 'Dashboard' },
+      { id: 'projects', label: 'Projects' },
+      { id: 'services', label: 'Services' },
+      { id: 'team', label: 'Team' },
+      { id: 'intents', label: 'Intents' },
+      { id: 'messages', label: 'Messages' },
+      { id: 'users', label: 'Users' },
+      { id: 'settings', label: 'Settings' },
     ],
   },
   {
     title: 'Account',
     links: [
-      { id: 'logout', label: 'Logout', icon: '\u21A4', logout: true }, // ⇤
+      { id: 'logout', label: 'Logout', logout: true },
     ],
   },
 ]

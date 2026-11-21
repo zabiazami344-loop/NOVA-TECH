@@ -33,23 +33,24 @@ const form = reactive({
 })
 
 const successVisible = ref(false)
+const formError = ref('')
+const pendingDeleteId = ref(null)
 let successTimer = null
 
 function onSubmit() {
   const name = form.name.trim()
   const year = Number(form.year)
 
-  // The original used two window.alert() calls. Kept as-is: it is the specified
-  // behaviour, and swapping it for inline errors would change the flow.
   if (name === '') {
-    alert('Please enter a project name.')
+    formError.value = 'Please enter a project name.'
     return
   }
-  if (!year || year < 2015 || year > 2030) {
-    alert('Please enter a valid year between 2015 and 2030.')
+  if (!Number.isInteger(year) || year < 2015 || year > 2030) {
+    formError.value = 'Please enter a valid year between 2015 and 2030.'
     return
   }
 
+  formError.value = ''
   addProject({
     name,
     category: form.category,
@@ -73,6 +74,12 @@ function onSubmit() {
   }, 4000)
 }
 
+function confirmDeleteProject() {
+  if (pendingDeleteId.value === null) return
+  deleteProject(pendingDeleteId.value)
+  pendingDeleteId.value = null
+}
+
 onBeforeUnmount(() => clearTimeout(successTimer))
 </script>
 
@@ -80,7 +87,7 @@ onBeforeUnmount(() => clearTimeout(successTimer))
   <div class="panel__header">
     <div>
       <h2 class="panel__title">Project Management</h2>
-      <p class="panel__sub">Add new projects or update their status.</p>
+      <p class="panel__sub">The initial list includes demo entries; add verified projects or update their status.</p>
     </div>
   </div>
 
@@ -133,6 +140,7 @@ onBeforeUnmount(() => clearTimeout(successTimer))
       <button type="submit" class="btn btn--primary">Add Project</button>
     </form>
 
+    <p v-if="formError" class="form__failure" role="alert">{{ formError }}</p>
     <div v-show="successVisible" class="dash-success">Project added successfully.</div>
   </div>
 
@@ -153,6 +161,9 @@ onBeforeUnmount(() => clearTimeout(successTimer))
           </tr>
         </thead>
         <tbody>
+          <tr v-if="!projects.length">
+            <td colspan="6" class="project-table__empty">No project records yet. Add a project above.</td>
+          </tr>
           <tr v-for="project in projects" :key="project.id" :data-id="project.id">
             <td><strong>{{ project.name }}</strong></td>
             <td>{{ capitalize(project.category) }}</td>
@@ -177,7 +188,20 @@ onBeforeUnmount(() => clearTimeout(successTimer))
               </select>
             </td>
             <td>
-              <button type="button" class="btn btn--ghost btn--sm dash-delete" @click="deleteProject(project.id)">
+              <div v-if="pendingDeleteId === project.id" class="project-delete-confirm" role="group" :aria-label="`Confirm deleting ${project.name}`">
+                <button type="button" class="project-delete-confirm__cancel" @click="pendingDeleteId = null">
+                  Cancel
+                </button>
+                <button type="button" class="project-delete-confirm__accept" @click="confirmDeleteProject">
+                  Confirm
+                </button>
+              </div>
+              <button
+                v-else
+                type="button"
+                class="btn btn--ghost btn--sm dash-delete"
+                @click="pendingDeleteId = project.id"
+              >
                 Delete
               </button>
             </td>

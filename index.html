@@ -10,18 +10,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!--
-      This script is copied straight from the original project.
-      It MUST stay inline and in <head> so it runs BEFORE the page paints,
-      otherwise dark mode would flash light for a split second.
-      Vue mounts after this point, so no changes needed.
-    -->
+    <!-- Apply the saved theme before paint; dark is the default unless light was selected. -->
     <script>
       (function () {
         try {
-          if (localStorage.getItem('nova-theme') === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-          }
+          const theme = localStorage.getItem('nova-theme');
+          document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : 'dark');
         } catch (e) {}
       })();
     </script>

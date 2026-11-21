@@ -16,7 +16,7 @@ export const aboutTeaser = {
   tag: 'Who We Are',
   title: 'We Turn Big Ideas Into Working Products',
   story:
-    'Founded in 2015, NOVA TECH has grown from a two-person studio into a full-service technology company. We partner with startups and enterprises to design, build and scale software that matters.',
+    'NOVA TECH brings product design and engineering together to help teams turn complex ideas into useful digital experiences. From web and mobile applications to AI, security and cloud systems, our focus is thoughtful work built around real needs.',
   values: [
     {
       id: 'mission',

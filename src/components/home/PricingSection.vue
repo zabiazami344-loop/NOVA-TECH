@@ -9,8 +9,12 @@ import { pricingPlans } from '@/data/home'
       <SectionHead
         tag="Pricing"
         title="Simple, Transparent Plans"
-        desc="Choose the plan that fits your stage. Scale up whenever you need more."
+        desc="Example service tiers to help frame a project discussion."
       />
+
+      <p class="content-disclosure">
+        Example pricing only; confirm scope and rates directly before making a purchase decision.
+      </p>
 
       <div class="pricing__grid">
         <!--

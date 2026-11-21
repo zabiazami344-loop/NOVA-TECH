@@ -32,6 +32,10 @@ const { search, filter, filteredItems, isEmpty } = useExplore(ref(team), {
 <template>
   <section class="team-page section-pad">
     <div class="container">
+      <p class="content-disclosure">
+        Team names and profiles are sample content. Replace them with verified team details before publishing.
+      </p>
+
       <!--
         The search box sits in its own .toolbar with no .toolbar__right beside
         it, because this page has no sort dropdown. The grid falls back to a

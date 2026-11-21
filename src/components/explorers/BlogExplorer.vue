@@ -26,6 +26,10 @@ const { search, filter, filteredItems, isEmpty } = useExplore(ref(articles), {
 <template>
   <section class="blog-page section-pad">
     <div class="container">
+      <p class="content-disclosure">
+        Articles and author profiles are sample editorial content for this demo.
+      </p>
+
       <!-- Same shape as the team page: search alone in a .toolbar, filter bar
            as its sibling, no sort dropdown. -->
       <div class="toolbar">

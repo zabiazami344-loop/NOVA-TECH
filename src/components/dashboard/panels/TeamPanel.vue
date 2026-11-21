@@ -14,7 +14,7 @@ import { teamMembers } from '@/data/dashboard'
   <div class="panel__header">
     <div>
       <h2 class="panel__title">Team Members</h2>
-      <p class="panel__sub">Everyone working at NOVA TECH.</p>
+      <p class="panel__sub">Sample team directory; replace these profiles with verified records.</p>
     </div>
   </div>
 

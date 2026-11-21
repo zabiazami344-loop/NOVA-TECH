@@ -1,6 +1,4 @@
 <script setup>
-import Counter from '@/components/ui/Counter.vue'
-import { heroStats } from '@/data/stats'
 </script>
 
 <template>
@@ -9,7 +7,7 @@ import { heroStats } from '@/data/stats'
 
     <div class="container hero__inner">
       <div class="hero__content">
-        <span class="hero__badge">✦ Trusted by 150+ companies worldwide</span>
+        <span class="hero__badge">Product engineering · AI · Security · Cloud</span>
 
         <h1 class="hero__title">
           Building the <span class="text-gradient">Future</span> of Technology
@@ -26,25 +24,6 @@ import { heroStats } from '@/data/stats'
           <router-link to="/projects" class="btn btn--outline">View Projects</router-link>
         </div>
 
-        <!--
-          v-for over the 3 stats. This used to be three copy-pasted
-          <div class="hero__stat"> blocks, each with its own
-          <span class="hero__stat-number counter" data-target="...">0</span>.
-
-          Note `class="hero__stat-number"` on <Counter>. Vue's FALLTHROUGH
-          ATTRIBUTES merge any extra class onto a child component's single
-          root element, so <Counter class="hero__stat-number"> renders
-          <span class="counter hero__stat-number" data-target="150">0</span> -
-          byte-for-byte the original markup, without Counter needing to know
-          anything about the hero.
-        -->
-        <div class="hero__stats">
-          <div v-for="stat in heroStats" :key="stat.id" class="hero__stat">
-            <Counter :target="stat.value" class="hero__stat-number" />
-            <span class="hero__stat-suffix">{{ stat.suffix }}</span>
-            <span class="hero__stat-label">{{ stat.label }}</span>
-          </div>
-        </div>
       </div>
 
       <!-- Decorative animated graphic. Purely CSS - no JS involved. -->

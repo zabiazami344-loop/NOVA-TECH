@@ -47,9 +47,10 @@ function onSubmit() {
     showMessage('Please enter your email address.', 'error')
   } else if (!isValidEmail(value)) {
     showMessage('Please enter a valid email address.', 'error')
+  } else if (!saveEmail(value)) {
+    showMessage('We could not save your email in this browser. Please try again.', 'error')
   } else {
-    saveEmail(value)
-    showMessage('Thanks for subscribing! Stay tuned for updates.', 'success')
+    showMessage('Email saved for this demo. No newsletter subscription was created.', 'success')
     email.value = ''
   }
 }
@@ -64,7 +65,7 @@ onBeforeUnmount(() => clearTimeout(hideTimer))
         <h2 class="newsletter__title">Stay In The Loop</h2>
 
         <p class="newsletter__desc">
-          Subscribe to our newsletter for the latest in development, AI and tech news.
+          Preview the newsletter signup. This demo stores your email in this browser only and does not create a subscription.
         </p>
 
         <!--
@@ -79,7 +80,7 @@ onBeforeUnmount(() => clearTimeout(hideTimer))
             placeholder="Enter your email address"
             aria-label="Email address"
           >
-          <button type="submit" class="btn btn--primary">Subscribe</button>
+          <button type="submit" class="btn btn--primary">Save Email</button>
         </form>
 
         <!-- hidden is a real HTML attribute, so v-show matches the original exactly -->

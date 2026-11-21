@@ -10,8 +10,12 @@ import { featuredMembers } from '@/data/team'
       <SectionHead
         tag="Meet The Experts"
         title="Talented Team Behind The Scenes"
-        desc="Our people are the heart of NOVA TECH — engineers, designers and strategists who care about quality."
+        desc="A look at the roles and skills represented in this NOVA TECH demo."
       />
+
+      <p class="content-disclosure">
+        Team names and profiles are sample content. Replace them with verified team details before publishing.
+      </p>
 
       <!--
         featuredMembers is already resolved in the data file (ids 1,4,5,6,8,10

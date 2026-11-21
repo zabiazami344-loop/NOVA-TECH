@@ -67,6 +67,10 @@ const visibleProjects = computed(() =>
 <template>
   <section class="projects-page section-pad">
     <div class="container">
+      <p class="content-disclosure">
+        These portfolio entries are sample content, not verified client case studies.
+      </p>
+
       <!-- Toolbar: search + sort -->
       <div class="toolbar">
         <SearchInput

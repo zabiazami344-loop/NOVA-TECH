@@ -1,40 +1,4 @@
 /**
- * Content for the Contact page.
- *
- * The left-hand info column was 4 nearly identical cards in contact.html, each
- * an emoji plus a heading and a line of text.
- *
- * Icons are \u{...} escapes with the glyph in a comment so the file cannot be
- * corrupted by a wrong encoding.
- */
-export const contactInfo = [
-  {
-    id: 'visit',
-    icon: '\u{1F4CD}', // 📍 round pushpin
-    title: 'Visit Us',
-    text: '123 Innovation Drive, Tech City, TC 12345',
-  },
-  {
-    id: 'call',
-    icon: '\u{1F4DE}', // 📞 telephone receiver
-    title: 'Call Us',
-    text: '+1 (555) 123-4567',
-  },
-  {
-    id: 'email',
-    icon: '\u{2709}\u{FE0F}', // ✉️ envelope (FE0F = variation selector)
-    title: 'Email Us',
-    text: 'hello@novatech.com',
-  },
-  {
-    id: 'hours',
-    icon: '\u{23F1}\u{FE0F}', // ⏱ stopwatch (FE0F = variation selector)
-    title: 'Working Hours',
-    text: 'Mon - Fri, 9:00 AM - 6:00 PM',
-  },
-]
-
-/**
  * The <select> options for "Service Needed".
  *
  * The empty first option is the "Select a service..." placeholder, and it is
