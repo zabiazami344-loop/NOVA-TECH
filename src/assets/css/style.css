@@ -306,8 +306,11 @@ h1, h2, h3, h4, h5, h6 {
    5. NAVBAR - Floating iOS glass pill
    ========================================================================== */
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 14px;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 1000;
   padding: 0 20px;
   background: transparent;
