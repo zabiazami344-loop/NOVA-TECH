@@ -20,8 +20,13 @@
         </p>
 
         <div class="hero__buttons">
-          <router-link to="/contact" class="btn btn--primary">Get Started</router-link>
-          <router-link to="/projects" class="btn btn--outline">View Projects</router-link>
+          <router-link to="/contact" class="btn btn--primary hero__cta hero__cta--primary">
+            <span>Get Started</span>
+            <span class="hero__cta-arrow" aria-hidden="true">→</span>
+          </router-link>
+          <router-link to="/projects" class="btn btn--outline hero__cta hero__cta--secondary">
+            View Projects
+          </router-link>
         </div>
 
       </div>
